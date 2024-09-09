@@ -1,0 +1,29 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #29afd1;
+    font-family: Arial, sans-serif;
+    text-align: center;    
+}
+
+form{
+    max-width: 400px;
+    background-color: cadetblue;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0,
+    0.5);    
+}
+
+button{
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;    
+}
