@@ -129,3 +129,53 @@ function clear(){
 document.getElementById('enviar').addEventListener('click', busqueda);
 document.getElementById('ciudades').addEventListener('change', clear);
 document.getElementById('peso').addEventListener('change', clear);
+
+//representación gráfica
+// Convertir el grafo en nodos y aristas (edges)
+let nodos = new Set(); 
+let aristas = [];
+
+// Crear nodos (ciudades) y aristas (conexiones entre ciudades con peso)
+Object.keys(grafo).forEach(ciudad => {
+    nodos.add(ciudad);
+    grafo[ciudad].forEach(conexion => {
+        nodos.add(conexion.destino); 
+        aristas.push({
+            from: ciudad,
+            to: conexion.destino,
+            label: `${conexion.peso} km`,
+            arrows: 'to'
+        });
+    });
+});
+
+// Convertir el Set de nodos a un array de objetos para Vis.js
+let nodosArray = Array.from(nodos).map(ciudad => ({ id: ciudad, label: ciudad }));
+
+// Configuración de los nodos y aristas para Vis.js
+let datos = {
+    nodes: new vis.DataSet(nodosArray),
+    edges: new vis.DataSet(aristas)
+};
+
+// Opciones de estilo para el grafo
+let opciones = {
+    edges: {
+        color: '#000000',
+        font: {
+            size: 14
+        }
+    },
+    nodes: {
+        shape: 'dot',
+        size: 20,
+        font: {
+            size: 16
+        },
+        borderWidth: 2
+    }
+};
+
+// Crear el grafo en el div 'grafo'
+let container = document.getElementById('grafo');
+let network = new vis.Network(container, datos, opciones);
